@@ -24,3 +24,7 @@ file:
 
 server:
   port: 8081
+
+# 알라딘 api
+aladin:
+  clientTTBKey: ttb3720451526001
