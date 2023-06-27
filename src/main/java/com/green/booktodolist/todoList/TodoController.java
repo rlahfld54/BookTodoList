@@ -1,8 +1,12 @@
 package com.green.booktodolist.todoList;
 
+import com.green.booktodolist.todoList.model.SelMainVo;
+import com.green.booktodolist.todoList.model.SelTitleDto;
+import io.swagger.v3.oas.annotations.Operation;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedInputStream;
@@ -11,11 +15,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/todo")
 public class TodoController {
+    private final TodoService service;
+    @Autowired
+    public TodoController(TodoService service) {
+        this.service = service;
+    }
 
     @GetMapping("/search")
     public String callapihttp(@RequestParam String str) throws JSONException {
@@ -46,4 +56,12 @@ public class TodoController {
         }
         return jsonPrintString;
     }
+
+    @GetMapping
+    @Operation(summary = "메인조회")
+    public SelMainVo GetMain(){
+        return service.selMain();
+    }
+
+
 }
