@@ -15,7 +15,7 @@ public class AladinSearchApi {
     public String search() {
         // 한 페이지에 최대 50개, 총 결과는 200개까지만 조회 가능
         // URL 세팅  - 신간 전체 리스트 api
-        String apiURL = "http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey="+clientTTBKey+"&QueryType=ItemNewAll&MaxResults=10&start=1&SearchTarget=Book&output=xml&Version=20131101";
+        String apiURL = "http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey="+clientTTBKey+"&QueryType=ItemNewAll&MaxResults=50&start=1&SearchTarget=Book&output=js&Version=20131101";
         String responseBody = get(apiURL);
         System.out.println(responseBody);
 
