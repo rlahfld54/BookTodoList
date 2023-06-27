@@ -5,13 +5,13 @@ spring:
       max-request-size: 12MB
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://192.168.0.144:3306/team_b
+    url: jdbc:mariadb://127.0.0.1:3306/team_b
     username: team_b
     password: green502
 
 # mybatis config
 mybatis:
-  type-aliases-package: com.green.todoapp
+  type-aliases-package: com.green.booktodolist
   mapper-locations: mapper/**/*.xml
 
 # swagger
