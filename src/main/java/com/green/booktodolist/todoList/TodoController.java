@@ -1,5 +1,7 @@
 package com.green.booktodolist.todoList;
 
+import com.green.booktodolist.todoList.model.SelDetailDto;
+import com.green.booktodolist.todoList.model.SelDetailVo;
 import com.green.booktodolist.todoList.model.SelMainVo;
 import com.green.booktodolist.todoList.model.SelTitleDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,6 +63,14 @@ public class TodoController {
     @Operation(summary = "메인조회")
     public SelMainVo GetMain(){
         return service.selMain();
+    }
+
+    @GetMapping("/{itodo}")
+    @Operation(summary = "상세조회")
+    public SelDetailDto GetDetail(@PathVariable int itodo){
+        SelDetailVo vo = new SelDetailVo();
+        vo.setItodo(itodo);
+        return service.selDetail(vo);
     }
 
 

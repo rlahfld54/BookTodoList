@@ -1,9 +1,6 @@
 package com.green.booktodolist.todoList;
 
-import com.green.booktodolist.todoList.model.SelCategoryDto;
-import com.green.booktodolist.todoList.model.SelFinishDto;
-import com.green.booktodolist.todoList.model.SelMainVo;
-import com.green.booktodolist.todoList.model.SelTitleDto;
+import com.green.booktodolist.todoList.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +23,10 @@ public class TodoService {
         List<SelFinishDto> finishTodo = mapper.selFinish();
         List<SelCategoryDto> selcategorylist = mapper.selcategorylist();
 
-
         return SelMainVo.builder().TodoTitle(selTitleDto).level(level).icategory(selcategorylist)
                 .NotFinish(notFinishTodo).Finish(finishTodo).build();
+    }
+    public SelDetailDto selDetail(SelDetailVo vo){
+        return mapper.selDetail(vo);
     }
 }
