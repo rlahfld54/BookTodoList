@@ -17,13 +17,12 @@
     </select>
 
     <select id="selcategorylist">
-        SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn,A.del_yn ,A.memo,A.start_date,A.finished_date
+        SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn,A.del_yn ,A.memo,A.start_date start,A.finished_date end,C.color
         FROM b_list A
         INNER JOIN book B
         on A.ibook = B.ibook
         INNER JOIN icategory C
         ON B.icate = C.icate
-        WHERE C.cate_name IN (SELECT cate_name FROM icategory)
 
     </select>
 
@@ -31,6 +30,7 @@
         SELECT A.itodo,B.title,A.bookmark,A.finish_yn
         FROM b_list A
         INNER JOIN book B
+        ON A.ibook = B.ibook
         WHERE finish_yn = 0
     </select>
 
@@ -38,12 +38,19 @@
         SELECT A.itodo,B.title,A.bookmark,A.finish_yn
         FROM b_list A
         INNER JOIN book B
+        ON A.ibook = B.ibook
         WHERE finish_yn = 1
     </select>
 
     <select id="selDetail">
-        select
-
+        SELECT A.created_todo_date createdTodo, C.cate_name catename ,B.title,B.writer,
+        A.start_date,A.finished_date finishedDate,A.memo,A.finish_yn finishYn
+        FROM b_list A
+        INNER JOIN book B
+        ON A.ibook = B.ibook
+        INNER JOIN icategory C
+        ON B.icate = C.icate
+        WHERE itodo = #{itodo}
     </select>
 
 </mapper>

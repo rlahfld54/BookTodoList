@@ -14,7 +14,7 @@ public class SelCategoryDto {
     private int bookmark;
     private int del_yn;
     private int finish_yn;
-    private String start_date;
-    private String finished_date;
-    //List<SelTitleDto> list;
+    private String start;
+    private String end;
+    private String color;
 }
