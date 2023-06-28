@@ -1,5 +1,4 @@
 package com.green.booktodolist.plan.model;
-
 import lombok.Data;
 @Data
 public class PlanBookDto {
@@ -9,4 +8,5 @@ public class PlanBookDto {
     private String publisher;
     private String isbn;
     private String addcode;
+
 }

@@ -28,3 +28,7 @@ server:
 # 알라딘 api
 aladin:
   clientTTBKey: ttb3720451526001
+
+# 국립중앙도서관 api
+isbnbook:
+  API_KEY: e7e239ae4128719a998e3a31ab3041b1a2cc0b014e95d5f4f2914e3187bbdc29

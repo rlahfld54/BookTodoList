@@ -2,6 +2,7 @@ package com.green.booktodolist.plan;
 
 import com.green.booktodolist.plan.model.PlanBookDto;
 import com.green.booktodolist.plan.model.PlanBookInsDto;
+import com.green.booktodolist.plan.model.PlanTodoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,10 @@ public class PlanService {
     public int insBook(PlanBookInsDto dto){
         PlanBookDto Bookdto = new PlanBookDto();
 
-        //받아온 addcode값에서 icate값 추출
         int temp;
         temp = Integer.parseInt((dto.getAddcode().substring(2,3))) + 1;
 
-        // 3글자만 잘리는지 확인
-        log.info("3글자만 잘리는지 확인중");
+        log.info("카테고리 분류 중");
         Bookdto.setIcate(temp); // 카테고리넣기
         Bookdto.setPublisher(dto.getPublisher());
         Bookdto.setTitle(dto.getTitle());
@@ -34,6 +33,13 @@ public class PlanService {
         Bookdto.setWriter(dto.getWriter());
         Bookdto.setAddcode(dto.getAddcode());
 
-        return mapper.insBook(Bookdto);
+        log.info("book DB작성완료");
+
+        return Bookdto.getIcate();
+    }
+
+    public int  postTodolist(PlanTodoDto dto){
+        log.info("투두리스트 작성 시작");
+        return 0;
     }
 }

@@ -1,5 +1,6 @@
 package com.green.booktodolist.plan.model;
 
+import lombok.Builder;
 import lombok.Data;
 @Data
 public class PlanBookInsDto {

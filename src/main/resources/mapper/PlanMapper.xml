@@ -10,4 +10,17 @@
         , isbn = #{isbn}
         , addcode = #{addcode}
     </insert>
+
+    <insert id="insTodoList">
+        INSERT INTO b_list
+        SET iuser = #{iuser}
+        , ibook = {ibook}
+        , start_date = {startDate}
+        , finished_date = {finishedDate}
+        , memo = {memo}
+        , del_yn = {del_yn}
+        , finish_yn = {finish_yn}
+        , created_todo_date = current_timestamp()
+        , bookmark = {bookmark}
+    </insert>
 </mapper>
