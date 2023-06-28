@@ -30,6 +30,7 @@
         SELECT A.itodo,B.title,A.bookmark,A.finish_yn
         FROM b_list A
         INNER JOIN book B
+        ON A.ibook = B.ibook
         WHERE finish_yn = 0
     </select>
 
@@ -37,6 +38,7 @@
         SELECT A.itodo,B.title,A.bookmark,A.finish_yn
         FROM b_list A
         INNER JOIN book B
+        ON A.ibook = B.ibook
         WHERE finish_yn = 1
     </select>
 
