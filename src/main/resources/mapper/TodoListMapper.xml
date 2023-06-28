@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.booktodolist.todoList.TodoMapper">
+
     <select id="selUserLevel">
         select book_level
         from b_user
@@ -15,9 +16,15 @@
         WHERE A.FINISH_yn = 0
     </select>
 
-    <select id="selcategory">
-        SELECT cate_name
-        FROM icategory
+    <select id="selcategorylist">
+        SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn,A.del_yn ,A.memo,A.start_date,A.finished_date
+        FROM b_list A
+        INNER JOIN book B
+        on A.ibook = B.ibook
+        INNER JOIN icategory C
+        ON B.icate = C.icate
+        WHERE C.cate_name IN (SELECT cate_name FROM icategory)
+
     </select>
 
     <select id="selNotFinish">
@@ -32,6 +39,11 @@
         FROM b_list A
         INNER JOIN book B
         WHERE finish_yn = 1
+    </select>
+
+    <select id="selDetail">
+        select
+
     </select>
 
 </mapper>

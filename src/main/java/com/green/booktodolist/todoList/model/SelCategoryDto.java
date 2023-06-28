@@ -1,11 +1,20 @@
 package com.green.booktodolist.todoList.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 public class SelCategoryDto {
     private String cate_name;
-    List<SelTitleDto> list;
+    private int itodo;
+    private String title;
+    private int bookmark;
+    private int del_yn;
+    private int finish_yn;
+    private String start_date;
+    private String finished_date;
+    //List<SelTitleDto> list;
 }
