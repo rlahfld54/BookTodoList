@@ -82,14 +82,14 @@ public class PlanController {
 
     @PostMapping("/book")
     @Operation(summary = "책정보 입력")
-    public int postBook(PlanBookInsDto dto){
-        return tmep_cate = service.insBook(dto);
+    public int postBook(@RequestBody PlanBookInsDto dto){
+        return service.insBook(dto);
     }
 
     @PostMapping("/Todolist")
     @Operation(summary = "투두리스트 작성")
-    public void postTodolist(PlanTodoDto dto){
-        service.postTodolist(dto);
+    public int postTodolist(@RequestBody PlanTodoDto dto){
+        return service.postTodolist(dto);
     }
 }
 
