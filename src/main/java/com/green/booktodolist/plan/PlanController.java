@@ -40,7 +40,7 @@ public class PlanController {
 
 
     @GetMapping("/search")
-    @Operation(summary = "검색기능")
+    @Operation(summary = "검색기능-테스트용")
     public String callapihttp(@RequestParam String str) throws JSONException {
 
         StringBuffer result = new StringBuffer();
@@ -48,13 +48,14 @@ public class PlanController {
         String jsonPrintString = null;
         String strurl= URLEncoder.encode(str);
         //String strurl2= URLEncoder.encode("도서");
-        https://www.nl.go.kr/seoji/SearchApi.do?
         //sbf.append("https://www.nl.go.kr/NL/search/openApi/search.do?key=20c6b5bcd4ef4e19948eb0be9dd73ab096f12c273a56cae1bcaa9fb3193c4f7d");
-        sbf.append("https://www.nl.go.kr/NL/search/openApi/search.do?key=");
-        sbf.append("20c6b5bcd4ef4e19948eb0be9dd73ab096f12c273a56cae1bcaa9fb3193c4f7d");
-        sbf.append("&result_style=xml&page_no=1&page_size=10");
-        //sbf.append("&pageSize=300&pageNum=1");
-        sbf.append("&title="+strurl);
+//        sbf.append("https://www.nl.go.kr/NL/search/openApi/search.do?key=");
+//        sbf.append("20c6b5bcd4ef4e19948eb0be9dd73ab096f12c273a56cae1bcaa9fb3193c4f7d");
+//        sbf.append("&result_style=xml&page_size=10");
+//        sbf.append("&title="+strurl);
+
+        // 테스트용
+        sbf.append("https://www.nl.go.kr/seoji/SearchApi.do?cert_key=20c6b5bcd4ef4e19948eb0be9dd73ab096f12c273a56cae1bcaa9fb3193c4f7d&result_style=xml&page_no=1&page_size=30&title="+strurl);
 
 
         //https://www.nl.go.kr/seoji/SearchApi.do?cert_key=e7e239ae4128719a998e3a31ab3041b1a2cc0b014e95d5f4f2914e3187bbdc29&result_style=json&page_no=1&page_size=100&title=%EC%9E%90%EB%B0%94
