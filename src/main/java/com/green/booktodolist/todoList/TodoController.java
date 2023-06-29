@@ -58,26 +58,28 @@ public class TodoController {
     }
 
     @GetMapping
-    @Operation(summary = "메인조회", description = "level: 레벨 " +
-            "icategory :카테고리 투두 리스트 ")
+    @Operation(summary = "메인조회", description = "Try it out -> Execute 눌러주세요")
     public SelMainVo GetMain(){
         return service.selMain();
     }
 
     @GetMapping("/{itodo}")
-    @Operation(summary = "상세조회")
+    @Operation(summary = "상세조회",description = "상세 조회 하고 싶은 itodo 의 값 2~33사이")
     public SelDetailDto GetDetail(@PathVariable int itodo){
 
         return service.selDetail(itodo);
     }
     @PostMapping
-    @Operation(summary = "투두 수정")
+    @Operation(summary = "투두 수정",description = "start: 투두시작날짜 예시: 2022-06-29  \n " +
+            "end: 투두종료 날짜 예시:2022-07-01  \n " +
+            "finish: 1이면 완료 0이면 미완료  \n " +
+            "itodo: 수정하고 싶은 itodo 값 2~33사이 \n ")
     public int PostTodo(@RequestBody UpdTodoDto dto){
         return service.UpdTodo(dto);
     }
 
     @DeleteMapping("/{itodo}")
-    @Operation(summary = "투두 삭제")
+    @Operation(summary = "투두 삭제",description = "삭제 하고 싶은 itodo 값 (2~33 사이의 숫자)")
     public int DelTodo(@PathVariable int itodo){
         return service.DelTodo(itodo);
     }
