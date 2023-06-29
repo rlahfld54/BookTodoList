@@ -53,4 +53,20 @@
         WHERE itodo = #{itodo}
     </select>
 
+    <update id="UpdTodo">
+        UPDATE b_list
+        SET start_date = #{start},
+        finished_date = #{end},
+        finish_yn = #{finish}
+        WHERE itodo = #{itodo}
+    </update>
+
+    <update id = "DelTodo">
+        update b_list
+        set del_yn = 1
+        where itodo = #{itodo}
+    </update>
+
+
+
 </mapper>

@@ -23,4 +23,5 @@
         , created_todo_date = current_timestamp()
         , bookmark = {bookmark}
     </insert>
+
 </mapper>

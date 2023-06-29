@@ -10,9 +10,7 @@ import java.util.List;
 public class SelMainVo {
     List<SelTitleDto> TodoTitle;
     private int level;
-
     List<SelCategoryDto> icategory;
-
     List<SelFinishDto>NotFinish;
     List<SelFinishDto>Finish;
 

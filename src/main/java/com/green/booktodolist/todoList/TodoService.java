@@ -26,7 +26,18 @@ public class TodoService {
         return SelMainVo.builder().TodoTitle(selTitleDto).level(level).icategory(selcategorylist)
                 .NotFinish(notFinishTodo).Finish(finishTodo).build();
     }
-    public SelDetailDto selDetail(SelDetailVo vo){
+    public SelDetailDto selDetail(int itodo){
+        SelDetailVo vo = new SelDetailVo();
+        vo.setItodo(itodo);
         return mapper.selDetail(vo);
+    }
+    public int UpdTodo(UpdTodoDto dto){
+        return mapper.UpdTodo(dto);
+    }
+
+    public int DelTodo(int itodo){
+        DelTodoDto dto = new DelTodoDto();
+        dto.setItodo(itodo);
+        return mapper.DelTodo(dto);
     }
 }

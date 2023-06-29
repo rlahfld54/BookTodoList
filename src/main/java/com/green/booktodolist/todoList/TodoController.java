@@ -1,9 +1,6 @@
 package com.green.booktodolist.todoList;
 
-import com.green.booktodolist.todoList.model.SelDetailDto;
-import com.green.booktodolist.todoList.model.SelDetailVo;
-import com.green.booktodolist.todoList.model.SelMainVo;
-import com.green.booktodolist.todoList.model.SelTitleDto;
+import com.green.booktodolist.todoList.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,7 +58,8 @@ public class TodoController {
     }
 
     @GetMapping
-    @Operation(summary = "메인조회")
+    @Operation(summary = "메인조회", description = "level: 레벨 " +
+            "icategory :카테고리 투두 리스트 ")
     public SelMainVo GetMain(){
         return service.selMain();
     }
@@ -69,10 +67,18 @@ public class TodoController {
     @GetMapping("/{itodo}")
     @Operation(summary = "상세조회")
     public SelDetailDto GetDetail(@PathVariable int itodo){
-        SelDetailVo vo = new SelDetailVo();
-        vo.setItodo(itodo);
-        return service.selDetail(vo);
+
+        return service.selDetail(itodo);
+    }
+    @PostMapping
+    @Operation(summary = "투두 수정")
+    public int PostTodo(@RequestBody UpdTodoDto dto){
+        return service.UpdTodo(dto);
     }
 
-
+    @DeleteMapping("/{itodo}")
+    @Operation(summary = "투두 삭제")
+    public int DelTodo(@PathVariable int itodo){
+        return service.DelTodo(itodo);
+    }
 }

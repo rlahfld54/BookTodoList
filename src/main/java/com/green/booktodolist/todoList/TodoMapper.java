@@ -14,6 +14,8 @@ public interface TodoMapper {
     List<SelFinishDto> selNotFinish();
     List<SelFinishDto> selFinish();
     SelDetailDto selDetail(SelDetailVo vo);
+    int UpdTodo(UpdTodoDto dto);
+    int DelTodo(DelTodoDto dto);
 
 
 }
