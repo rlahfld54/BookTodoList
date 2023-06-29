@@ -9,7 +9,7 @@
     </select>
 
     <select id="selTitle">
-        SELECT B.title,A.bookmark,A.finish_yn
+        SELECT A.itodo,B.title,A.bookmark,A.finish_yn finish
         FROM b_list A
         INNER JOIN book B
         ON A.ibook = B.ibook
@@ -17,7 +17,7 @@
     </select>
 
     <select id="selcategorylist">
-        SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn,A.del_yn ,A.memo,A.start_date start,A.finished_date end,C.color
+        SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn finish,A.del_yn del ,A.memo,A.start_date start,A.finished_date end,C.color
         FROM b_list A
         INNER JOIN book B
         on A.ibook = B.ibook
@@ -27,7 +27,7 @@
     </select>
 
     <select id="selNotFinish">
-        SELECT A.itodo,B.title,A.bookmark,A.finish_yn
+        SELECT A.itodo,B.title,A.bookmark,A.finish_yn finish
         FROM b_list A
         INNER JOIN book B
         ON A.ibook = B.ibook
@@ -35,7 +35,7 @@
     </select>
 
     <select id="selFinish">
-        SELECT A.itodo,B.title,A.bookmark,A.finish_yn
+        SELECT A.itodo,B.title,A.bookmark,A.finish_yn finish
         FROM b_list A
         INNER JOIN book B
         ON A.ibook = B.ibook

@@ -7,6 +7,6 @@ public class SelTitleDto {
     private int itodo;
     private String title;
     private int bookmark;
-    private int finish_yn;
+    private int finish;
 
 }
