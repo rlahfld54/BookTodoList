@@ -32,14 +32,21 @@ public class PlanService {
         Bookdto.setIsbn(dto.getIsbn());
         Bookdto.setWriter(dto.getWriter());
         Bookdto.setAddcode(dto.getAddcode());
-
         log.info("book DB작성완료");
-
-        return Bookdto.getIcate();
+        return mapper.insBook(Bookdto);
     }
 
-    public int  postTodolist(PlanTodoDto dto){
+    public int postTodolist(PlanTodoDto dto){
         log.info("투두리스트 작성 시작");
-        return 0;
+        dto.setIuser(dto.getIuser());
+        dto.setIbook(dto.getIbook());
+        dto.setStartDate(dto.getStartDate());
+        dto.setFinishedDate(dto.getFinishedDate());
+        dto.setDel_yn(dto.getDel_yn());
+        dto.setFinish_yn(dto.getDel_yn());
+        dto.setBookmark(dto.getBookmark());
+        log.info("투두리스트 작성 완료");
+
+        return mapper.insTodoList(dto);
     }
 }
