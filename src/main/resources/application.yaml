@@ -23,7 +23,7 @@ file:
   dir: D:/download/todo/
 
 server:
-  port: 8081
+  port: 8080
 
 # 알라딘 api
 aladin:
