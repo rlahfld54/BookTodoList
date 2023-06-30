@@ -56,8 +56,7 @@ public class TodoService {
             }
         }
 
-        return SelMainVo.builder().TodoTitle(selTitleDto).level(level).icategory(selcategorylist)
-                .NotFinish(notFinishTodo).Finish(finishTodo).build();
+        return SelMainVo.builder().level(level).icategory(selcategorylist).build();
 
     }
     public SelDetailDto selDetail(int itodo){
