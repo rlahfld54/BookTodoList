@@ -7,5 +7,5 @@ public class SelFinishDto {
     private int itodo;
     private String title;
     private String bookmark;
-    private int finish;
+    private String finish;
 }

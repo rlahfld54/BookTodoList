@@ -1,8 +1,6 @@
 package com.green.booktodolist.calendar;
 
 import com.green.booktodolist.calendar.model.CalendarDto;
-import com.green.booktodolist.todoList.TodoService;
-import com.green.booktodolist.todoList.model.SelMainVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
