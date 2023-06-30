@@ -58,7 +58,15 @@ public class TodoController {
     }
 
     @GetMapping
-    @Operation(summary = "메인조회", description = "Try it out -> Execute 눌러주세요")
+    @Operation(summary = "메인조회",
+            description = "Try it out -> Execute 눌러주세요 \n\n "+
+            "cate_name: 카테고리 이름 \n\n " +
+            "itodo : 투두리스트 PK 값 \n\n " +
+            "bookmark : 책갈피 \n\n " +
+            "del: 1이면 삭제인척 \n\n " +
+            "start: 투두 시작날짜 \n\n " +
+            "end: 투두 종료 날짜 \n\n "
+    )
     public SelMainVo GetMain(){
         return service.selMain();
     }

@@ -13,7 +13,7 @@ public class SelCategoryDto {
     private String title;
     private int bookmark;
     private int del;
-    private int finish;
+    private String finish;
     private String start;
     private String end;
     private String color;
