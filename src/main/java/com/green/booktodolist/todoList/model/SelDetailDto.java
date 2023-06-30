@@ -4,12 +4,13 @@ import lombok.Data;
 
 @Data
 public class SelDetailDto {
+    private int itodo;
     private String createdTodo;
     private String catename;
     private String title;
     private String writer;
-    private String startDate;
-    private String finishedDate;
+    private String start;
+    private String finish;
     private String memo;
     private String finishYn;
 

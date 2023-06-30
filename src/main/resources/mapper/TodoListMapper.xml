@@ -17,12 +17,15 @@
     </select>
 
     <select id="selcategorylist">
-        SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn finish,A.del_yn del ,A.memo,A.start_date start,A.finished_date end,C.color
+        SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn finish,A.del_yn del ,A.memo,
+        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d') end,C.color
         FROM b_list A
         INNER JOIN book B
         on A.ibook = B.ibook
         INNER JOIN icategory C
         ON B.icate = C.icate
+        WHERE A.FINISH_yn = 0
+        ORDER BY C.cate_name,A.itodo
 
     </select>
 
@@ -32,6 +35,7 @@
         INNER JOIN book B
         ON A.ibook = B.ibook
         WHERE finish_yn = 0
+        order by A.itodo
     </select>
 
     <select id="selFinish">
@@ -40,11 +44,12 @@
         INNER JOIN book B
         ON A.ibook = B.ibook
         WHERE finish_yn = 1
+        order by A.itodo desc
     </select>
 
     <select id="selDetail">
-        SELECT A.created_todo_date createdTodo, C.cate_name catename ,B.title,B.writer,
-        A.start_date,A.finished_date finishedDate,A.memo,A.finish_yn finishYn
+        SELECT date_format(A.created_todo_date, '%Y-%m-%d') createdTodo , C.cate_name catename ,B.title,B.writer,
+        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d')finish,A.memo,A.finish_yn finishYn
         FROM b_list A
         INNER JOIN book B
         ON A.ibook = B.ibook
@@ -66,5 +71,5 @@
         set del_yn = 1
         where itodo = #{itodo}
     </update>
-    
+
 </mapper>
