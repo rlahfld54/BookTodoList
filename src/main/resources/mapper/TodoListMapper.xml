@@ -18,7 +18,7 @@
 
     <select id="selcategorylist">
         SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn finish,A.del_yn del ,A.memo,
-        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d') end,C.color
+        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d') end,C.color,B.isbn
         FROM b_list A
         INNER JOIN book B
         on A.ibook = B.ibook
@@ -26,7 +26,6 @@
         ON B.icate = C.icate
         WHERE A.FINISH_yn = 0
         ORDER BY C.cate_name,A.itodo
-
     </select>
 
     <select id="selNotFinish">

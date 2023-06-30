@@ -17,4 +17,5 @@ public class SelCategoryDto {
     private String start;
     private String end;
     private String color;
+    private String isbn;
 }
