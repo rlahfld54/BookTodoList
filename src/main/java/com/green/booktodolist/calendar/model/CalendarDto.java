@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class CalendarDto {
+    private int itodo;
     private String title;
     private String start;
     private String end;

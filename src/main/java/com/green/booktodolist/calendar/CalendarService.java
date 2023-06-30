@@ -33,7 +33,6 @@ public class CalendarService {
         ArrayList<CalendarDto> calendarList = new ArrayList<>();
         for (int i = 0; i < icategoryList.size(); i++) {
             CalendarDto dto = new CalendarDto();
-
             String date = icategoryList.get(i).getStart();
             String enddate = icategoryList.get(i).getEnd();
 
@@ -47,6 +46,7 @@ public class CalendarService {
                 throw new RuntimeException(e);
             }
 
+            dto.setItodo(icategoryList.get(i).getItodo());
             dto.setTitle(icategoryList.get(i).getTitle());
             dto.setStart(startdate);
             dto.setEnd(endDate);
@@ -58,13 +58,12 @@ public class CalendarService {
     }
 
     public String changeDate(String str) throws ParseException {
-//        String str = "2023-12-25 00:41:19";
+        // String str = "2023-12-25 00:41:19";
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = format.parse(str);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");   // yyyy-MM-dd HH:mm:ss
         String test = formatter.format(date);
-        System.out.println(test);
         return test;
     }
 }
