@@ -10,9 +10,9 @@ public class SelDetailDto {
     private String title;
     private String writer;
     private String start;
-    private String finish;
+    private String end;
     private String memo;
-    private String finishYn;
+    private String finish;
 
 
 }
