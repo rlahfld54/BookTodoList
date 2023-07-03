@@ -60,6 +60,14 @@ public class PlanService {
         return mapper.insTodoList(dto);
     }
 
+    public int bookCategory(String eaAddCode){
+
+        log.info("카테고리 분류 중");
+        int temp;
+        temp = Integer.parseInt(eaAddCode.substring(2, 3)) + 1;
+        return temp;
+    }
+
     public String callapihttp(String str) { // api 호출
 
 

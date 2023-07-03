@@ -2,22 +2,31 @@ package com.green.booktodolist.plan;
 
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
-import com.green.booktodolist.plan.model.PlanApiDto;
-import com.green.booktodolist.plan.model.PlanBookInsDto;
-import com.green.booktodolist.plan.model.PlanTodoDto;
+import com.green.booktodolist.plan.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.json.simple.parser.JSONParser;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
 import static java.sql.DriverManager.println;
@@ -41,14 +50,14 @@ public class PlanController {
 
     @GetMapping("/search")
     @Operation(summary = "검색기능-테스트용")
-    public String callapihttp(@RequestParam String str) throws JSONException {
+    public List<PlanBookDataDto> callapihttp(@RequestParam String str) throws JSONException {
 
         log.info("책 검색 - api 호출 시작");
 
-        String apiKey = "e7e239ae4128719a998e3a31ab3041b1a2cc0b014e95d5f4f2914e3187bbdc29"; //인증키
-        String text = null;
+        String apiKey = "e7e239ae4128719a998e3a31ab3041b1a2cc0b014e95d5f4f2914e3187bbdc29"; // 인증키
+        String result = null;
         try {
-            text = URLEncoder.encode(str, "UTF-8");
+            result = URLEncoder.encode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패", e);
         }
@@ -57,36 +66,54 @@ public class PlanController {
 
         try {
             String urlstr = "https://www.nl.go.kr/seoji/SearchApi.do?cert_key=" // 기본세팅 주소
-            + apiKey // 인증키
-            + "&result_style=json&page_no=1&page_size=30" // 페이지사이즈 30 고정
-            + "&title=" + text; // 검색어
+                    + apiKey // 인증키
+                    + "&result_style=json&page_no=1&page_size=30" // 페이지사이즈 30 고정
+                    + "&title=" + result; // 검색어
 
             URL url = new URL(urlstr);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),"UTF-8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
 
             String returnLine;
-            while ((returnLine = br.readLine()) != null){
-                requestApi.append(returnLine+"\n");
+            while ((returnLine = br.readLine()) != null) {
+                requestApi.append(returnLine + "\n");
             }
             urlConnection.disconnect();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        log.info("책 검색 - api 호출 완료");
+        result = requestApi.toString();
 
-        log.info("파싱 시작");
+        JSONObject jsonObject = new JSONObject(result);
+        JSONArray jsonArray = jsonObject.getJSONArray("docs");
 
 
+        List<PlanBookDataDto> SerachBookList = new ArrayList<>();
 
-        return requestApi+" ";
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            String publisher = obj.optString("PUBLISHER"); // 출판사 (발행자)
+            String eaAddCode = obj.optString("EA_ADD_CODE"); // 부가기호
+            String author = obj.optString("AUTHOR"); // 저자
+            String eaIsbn = obj.optString("EA_ISBN"); // isbn
+            String title = obj.optString("TITLE"); // 제목
+            String page = obj.optString("PAGE"); // 페이지수
 
+            PlanBookDataDto dto = new PlanBookDataDto();
+            dto.setCate(service.bookCategory(eaAddCode)); // 카테고리분류
+            dto.setIsbn(eaIsbn);
+            dto.setCompany(publisher);
+            dto.setTitle(title);
+            dto.setAddcode(eaAddCode);
+            dto.setAuthor(author);
+            dto.setTotalpage(page);
+            SerachBookList.add(dto);
+        }
+        return SerachBookList;
     }
-
 
     @PostMapping("/book")
     @Operation(summary = "책정보 입력")

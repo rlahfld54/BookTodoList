@@ -11,4 +11,5 @@ public class PlanBookDataDto {
     private String company; // 출판사
     private String isbn; // isbn
     private String addcode; // 부가기호
+    private String totalpage;
 }
