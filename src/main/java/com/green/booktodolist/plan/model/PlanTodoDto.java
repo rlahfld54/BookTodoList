@@ -3,10 +3,11 @@ package com.green.booktodolist.plan.model;
 import lombok.Builder;
 import lombok.Data;
 @Data
-@Builder
+
+//todolist 입력 데이터
 public class PlanTodoDto {
     private int iuser;
-    private int ibook;
+    private Long ibook;
     private String startDate;
     private String finishedDate;
     private String memo;

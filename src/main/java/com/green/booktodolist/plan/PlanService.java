@@ -1,25 +1,16 @@
 package com.green.booktodolist.plan;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.booktodolist.plan.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-
+import static org.apache.commons.lang3.RegExUtils.replaceAll;
 
 
 @Slf4j
@@ -32,34 +23,43 @@ public class PlanService {
         this.mapper = mapper;
     }
 
-    public int insBook(PlanBookInsDto dto) {
-        PlanBookDto Bookdto = new PlanBookDto();
+//    public int insBook(PlanTodoInsDto dto) {
+//        PlanBookDto Bookdto = new PlanBookDto();
+//        int temp;
+//        temp = Integer.parseInt((dto.getAddcode().substring(2, 3))) + 1;
+//        log.info("카테고리 분류 중");
+//        Bookdto.setIcate(temp); // 카테고리넣기
+//        Bookdto.setPublisher(dto.getPublisher());
+//        Bookdto.setTitle(dto.getTitle());
+//        Bookdto.setIsbn(dto.getIsbn());
+//        Bookdto.setWriter(dto.getWriter());
+//        Bookdto.setAddcode(dto.getAddcode());
+//        log.info("book DB작성완료");
+//        return mapper.insBook(Bookdto);
+//    }
 
-        int temp;
-        temp = Integer.parseInt((dto.getAddcode().substring(2, 3))) + 1;
-
-        log.info("카테고리 분류 중");
-        Bookdto.setIcate(temp); // 카테고리넣기
-        Bookdto.setPublisher(dto.getPublisher());
-        Bookdto.setTitle(dto.getTitle());
-        Bookdto.setIsbn(dto.getIsbn());
-        Bookdto.setWriter(dto.getWriter());
-        Bookdto.setAddcode(dto.getAddcode());
-        log.info("book DB작성완료");
-        return mapper.insBook(Bookdto);
+    public Long postBook(PlanTodoInsDto dto){
+        log.info("book DB작성");
+        PlanBookDto bookdto = new PlanBookDto();
+        bookdto.setWriter(dto.getAuthor());
+        bookdto.setPublisher(dto.getCompany());
+        bookdto.setTitle(dto.getTitle());
+        bookdto.setIcate(dto.getCate());
+        bookdto.setPage(dto.getPage());
+        bookdto.setIsbn(dto.getIsbn());
+        return mapper.insBook(bookdto);
     }
 
-    public int postTodolist(PlanTodoDto dto) {
-        log.info("투두리스트 작성 시작");
-        dto.setIuser(dto.getIuser());
-        dto.setIbook(dto.getIbook());
-        dto.setStartDate(dto.getStartDate());
-        dto.setFinishedDate(dto.getFinishedDate());
-        dto.setDel_yn(dto.getDel_yn());
-        dto.setFinish_yn(dto.getDel_yn());
-        dto.setBookmark(dto.getBookmark());
-        log.info("투두리스트 작성 완료");
-
+    public int postTodolist(PlanTodoInsDto dto, Long ibook) {
+        PlanTodoDto planDto = new PlanTodoDto();
+        planDto.setIbook(ibook);
+        planDto.setIuser(dto.getIuser());
+        planDto.setFinish_yn(dto.getFinish());
+        planDto.setIuser(dto.getIuser());
+        planDto.setStartDate(dto.getStart());
+        planDto.setFinishedDate(dto.getEnd());
+        planDto.setMemo(dto.getMemo());
+        planDto.setBookmark(dto.getBookmark());
         return mapper.insTodoList(dto);
     }
 
@@ -72,6 +72,7 @@ public class PlanService {
     }
 
     public List<PlanBookDataDto> callapihttp(String result) { // api 호출
+        log.info("데이터 파싱");
 
         JSONObject jsonObject = new JSONObject(result);
         JSONArray jsonArray = jsonObject.getJSONArray("docs");
@@ -93,9 +94,15 @@ public class PlanService {
             dto.setCompany(publisher);
             dto.setTitle(title);
             dto.setAuthor(author);
-            dto.setTotalpage(page);
+            if (!page.equals("")) { // 페이지 수에서 숫자만 남기고 제거
+                String resultpage = page.replaceAll("[^0-9]", "");
+                dto.setPage(resultpage);
+            }
+            else dto.setPage(page);
             SerachBookList.add(dto);
+
         }
+        log.info("검색결과 리스트 작성 완료");
         return SerachBookList;
     }
 }

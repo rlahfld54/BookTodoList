@@ -1,35 +1,20 @@
 package com.green.booktodolist.plan;
 
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonObject;
 import com.green.booktodolist.plan.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.json.simple.parser.JSONParser;
-import org.springframework.web.util.UriComponentsBuilder;
-
-
-import static java.sql.DriverManager.println;
 @Slf4j
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -49,7 +34,7 @@ public class PlanController {
 
 
     @GetMapping("/search")
-    @Operation(summary = "검색기능-테스트용")
+    @Operation(summary = "검색기능")
     public List<PlanBookDataDto> callapihttp(@RequestParam String str) throws JSONException {
 
         log.info("책 검색 - api 호출 시작");
@@ -84,22 +69,16 @@ public class PlanController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         result = requestApi.toString();
 
         return service.callapihttp(result);
     }
 
-    @PostMapping("/book")
-    @Operation(summary = "책정보 입력")
-    public int postBook(@RequestBody PlanBookInsDto dto){
-        return service.insBook(dto);
-    }
-
     @PostMapping("/Todolist")
     @Operation(summary = "투두리스트 작성")
-    public int postTodolist(@RequestBody PlanTodoDto dto){
-        return service.postTodolist(dto);
+    public int postTodolist(@RequestBody PlanTodoInsDto dto){
+        Long ibook = service.postBook(dto); // ibook
+        return service.postTodolist(dto, ibook); // todolist
     }
 
 
