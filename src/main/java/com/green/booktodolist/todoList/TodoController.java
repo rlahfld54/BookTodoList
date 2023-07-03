@@ -1,5 +1,8 @@
 package com.green.booktodolist.todoList;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.booktodolist.todoList.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import org.json.JSONException;
@@ -7,15 +10,20 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.io.*;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -25,36 +33,6 @@ public class TodoController {
     @Autowired
     public TodoController(TodoService service) {
         this.service = service;
-    }
-
-    @GetMapping("/search")
-    public String callapihttp(@RequestParam String str) throws JSONException {
-        StringBuffer result = new StringBuffer();
-        StringBuffer sbf = new StringBuffer();
-        String jsonPrintString = null;
-        String strurl= URLEncoder.encode(str);
-        String strurl2= URLEncoder.encode("도서");
-        sbf.append("https://www.nl.go.kr/NL/search/openApi/search.do?key=20c6b5bcd4ef4e19948eb0be9dd73ab096f12c273a56cae1bcaa9fb3193c4f7d");
-        sbf.append("&kwd="+strurl);
-        sbf.append("&pageSize=500&pageNum=1");
-        sbf.append("&category="+strurl2);
-        try {
-            //String apiUrl = "https://www.nl.go.kr/NL/search/openApi/search.do?key=a29b041386e3197429c36f81b0dc7354c5154ee69f0c2279234a9048c54cdce2&kwd=%ED%86%A0%EC%A7%80";
-            URL url = new URL(sbf.toString());
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.connect();
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(urlConnection.getInputStream());
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(bufferedInputStream, "UTF-8"));
-            String returnLine;
-            while((returnLine = bufferedReader.readLine()) != null) {
-                result.append(returnLine);
-            }
-            JSONObject jsonObject = XML.toJSONObject(result.toString());
-            jsonPrintString = ((JSONObject) jsonObject).toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return jsonPrintString;
     }
 
     @GetMapping
@@ -77,6 +55,7 @@ public class TodoController {
 
         return service.selDetail(itodo);
     }
+
     @PostMapping
     @Operation(summary = "투두 수정",description = "start: 투두시작날짜 예시: 2022-06-29  \n " +
             "end: 투두종료 날짜 예시:2022-07-01  \n " +
@@ -91,4 +70,7 @@ public class TodoController {
     public int DelTodo(@PathVariable int itodo){
         return service.DelTodo(itodo);
     }
+
+
+
 }

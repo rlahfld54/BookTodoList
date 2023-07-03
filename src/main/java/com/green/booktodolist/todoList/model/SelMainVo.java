@@ -8,11 +8,11 @@ import java.util.List;
 @Data
 @Builder
 public class SelMainVo {
-    List<SelTitleDto> TodoTitle;
+//    List<SelTitleDto> TodoTitle;
     private int level;
     List<SelCategoryDto> icategory;
-    List<SelFinishDto>NotFinish;
-    List<SelFinishDto>Finish;
+//    List<SelFinishDto>NotFinish;
+//    List<SelFinishDto>Finish;
 
 
 }
