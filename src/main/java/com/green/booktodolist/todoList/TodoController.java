@@ -5,24 +5,15 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.booktodolist.todoList.model.*;
 import io.swagger.v3.oas.annotations.Operation;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -71,6 +62,47 @@ public class TodoController {
         return service.DelTodo(itodo);
     }
 
+    @GetMapping("/naver")
+    public List<BookVo2> GetNaverBook(String text){
+        String clientId = "ncAR9prYDibH9NS7yQuA";
+        String clientSecret = "vl2B4Z4tvO";
+
+        URI uri = UriComponentsBuilder.fromUriString("https://openapi.naver.com")
+                .path("/v1/search/book.json")
+                .queryParam("query", text)
+                .queryParam("display", 100)
+                .queryParam("start", 1)
+                .queryParam("sort", "sim")
+                .encode()
+                .build()
+                .toUri();
+
+        // Spring 요청 제공 클래스
+        RequestEntity<Void> req = RequestEntity
+                .get(uri)
+                .header("X-Naver-Client-Id", clientId)
+                .header("X-Naver-Client-Secret", clientSecret)
+                .build();
+        // Spring 제공 restTemplate
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> resp = restTemplate.exchange(req, String.class);
+
+        // JSON 파싱 (Json 문자열을 객체로 만듦, 문서화)
+        ObjectMapper om = new ObjectMapper();
+        NaverResultVo resultVO = null;
+
+        try {
+            resultVO = om.readValue(resp.getBody(), NaverResultVo.class);
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        List<BookVo2> books =resultVO.getItems();
+        //model.addAttribute("books", books);
+        return books;
+    }
 
 
 }
