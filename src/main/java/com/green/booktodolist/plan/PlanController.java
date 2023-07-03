@@ -87,32 +87,7 @@ public class PlanController {
 
         result = requestApi.toString();
 
-        JSONObject jsonObject = new JSONObject(result);
-        JSONArray jsonArray = jsonObject.getJSONArray("docs");
-
-
-        List<PlanBookDataDto> SerachBookList = new ArrayList<>();
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            String publisher = obj.optString("PUBLISHER"); // 출판사 (발행자)
-            String eaAddCode = obj.optString("EA_ADD_CODE"); // 부가기호
-            String author = obj.optString("AUTHOR"); // 저자
-            String eaIsbn = obj.optString("EA_ISBN"); // isbn
-            String title = obj.optString("TITLE"); // 제목
-            String page = obj.optString("PAGE"); // 페이지수
-
-            PlanBookDataDto dto = new PlanBookDataDto();
-            dto.setCate(service.bookCategory(eaAddCode)); // 카테고리분류
-            dto.setIsbn(eaIsbn);
-            dto.setCompany(publisher);
-            dto.setTitle(title);
-            dto.setAddcode(eaAddCode);
-            dto.setAuthor(author);
-            dto.setTotalpage(page);
-            SerachBookList.add(dto);
-        }
-        return SerachBookList;
+        return service.callapihttp(result);
     }
 
     @PostMapping("/book")
