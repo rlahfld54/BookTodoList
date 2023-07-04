@@ -64,8 +64,6 @@ public class PlanService {
     }
 
     public int bookCategory(String eaAddCode){
-
-        log.info("카테고리 분류 중");
         int temp;
         if (eaAddCode.length() >= 3) {
             char thirdChar = eaAddCode.charAt(2);
@@ -78,7 +76,7 @@ public class PlanService {
     }
 
     public List<PlanBookDataDto> callapihttp(String result) { // api 호출
-        log.info("데이터 파싱");
+        log.info("데이터 파싱 시작");
 
         JSONObject jsonObject = new JSONObject(result);
         JSONArray jsonArray = jsonObject.getJSONArray("docs");
@@ -104,8 +102,9 @@ public class PlanService {
                 String resultpage = page.replaceAll("[^0-9]", "");
                 dto.setPage(resultpage);
             }
-            else dto.setPage(page);
+            else dto.setPage(page); // 페이지 정보 없는 책은 "" 공백처리
             SerachBookList.add(dto);
+            log.info("데이터 파싱 완료");
 
         }
         log.info("검색결과 리스트 작성 완료");
