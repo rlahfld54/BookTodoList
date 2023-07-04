@@ -17,4 +17,5 @@ public class PlanTodoInsDto {
     private String page;
     private String isbn;
     private int iuser;
+    private Long ibook;
 }

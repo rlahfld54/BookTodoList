@@ -8,10 +8,10 @@ import lombok.Data;
 public class PlanTodoDto {
     private int iuser;
     private Long ibook;
-    private String startDate;
-    private String finishedDate;
+    private String start;
+    private String end;
     private String memo;
-    private int del_yn;
+    private int del;
     private int finish_yn;
     private int createdAt;
     private int bookmark;

@@ -44,23 +44,29 @@ public class PlanService {
         bookdto.setWriter(dto.getAuthor());
         bookdto.setPublisher(dto.getCompany());
         bookdto.setTitle(dto.getTitle());
-        bookdto.setIcate(dto.getCate());
+        bookdto.setIcate(Integer.parseInt(dto.getCate()));
         bookdto.setPage(dto.getPage());
         bookdto.setIsbn(dto.getIsbn());
-        return mapper.insBook(bookdto);
+        mapper.insBook(bookdto);
+        log.info("book DB작성완료");
+        return bookdto.getIbook();
     }
 
     public int postTodolist(PlanTodoInsDto dto, Long ibook) {
+        System.out.println("테스트 : " +ibook);
+        log.info("todolist DB 작성시작");
         PlanTodoDto planDto = new PlanTodoDto();
-        planDto.setIbook(ibook);
         planDto.setIuser(dto.getIuser());
         planDto.setFinish_yn(dto.getFinish());
         planDto.setIuser(dto.getIuser());
-        planDto.setStartDate(dto.getStart());
-        planDto.setFinishedDate(dto.getEnd());
+        planDto.setStart(dto.getStart());
+        planDto.setEnd(dto.getEnd());
         planDto.setMemo(dto.getMemo());
         planDto.setBookmark(dto.getBookmark());
-        return mapper.insTodoList(dto);
+        planDto.setIbook(ibook);
+        System.out.println("테스트2 : "+planDto.getIbook());
+        log.info("todolist DB 작성완료");
+        return mapper.insTodoList(planDto);
     }
 
     public int bookCategory(String eaAddCode){
@@ -69,6 +75,7 @@ public class PlanService {
             char thirdChar = eaAddCode.charAt(2);
             temp = Integer.parseInt(String.valueOf(thirdChar)) + 1;
         } else {
+            log.info("카테고리 분류 에러발생");
             temp = 11; // 오류 카테고리 코드
         }
         System.out.println(temp);
@@ -102,7 +109,7 @@ public class PlanService {
                 String resultpage = page.replaceAll("[^0-9]", "");
                 dto.setPage(resultpage);
             }
-            else dto.setPage(page); // 페이지 정보 없는 책은 "" 공백처리
+            else dto.setPage(null); // 페이지 정보 없는 책은 "" 공백처리
             SerachBookList.add(dto);
             log.info("데이터 파싱 완료");
 
