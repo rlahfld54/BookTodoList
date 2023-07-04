@@ -2,7 +2,6 @@ package com.green.booktodolist.plan.model;
 import lombok.Data;
 @Data
 public class PlanBookDto {
-
     private Long ibook;
     private String icate;
     private String title;

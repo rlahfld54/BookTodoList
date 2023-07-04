@@ -1,22 +1,16 @@
 package com.green.booktodolist.plan;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.booktodolist.plan.model.*;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-
+import static org.apache.commons.lang3.RegExUtils.replaceAll;
 
 
 @Slf4j
@@ -29,43 +23,86 @@ public class PlanService {
         this.mapper = mapper;
     }
 
-    public Long insBook(PlanTodoInsDto dto) {
-        PlanBookDto Bookdto = new PlanBookDto();
+//    public int insBook(PlanTodoInsDto dto) {
+//        PlanBookDto Bookdto = new PlanBookDto();
+//        int temp;
+//        temp = Integer.parseInt((dto.getAddcode().substring(2, 3))) + 1;
+//        log.info("카테고리 분류 중");
+//        Bookdto.setIcate(temp); // 카테고리넣기
+//        Bookdto.setPublisher(dto.getPublisher());
+//        Bookdto.setTitle(dto.getTitle());
+//        Bookdto.setIsbn(dto.getIsbn());
+//        Bookdto.setWriter(dto.getWriter());
+//        Bookdto.setAddcode(dto.getAddcode());
+//        log.info("book DB작성완료");
+//        return mapper.insBook(Bookdto);
+//    }
 
-        log.info("book DB작성시작");
-        Bookdto.setIcate(dto.getCate()); // 카테고리넣기
-        Bookdto.setPublisher(dto.getCompany());
-        Bookdto.setTitle(dto.getTitle());
-        Bookdto.setIsbn(dto.getIsbn());
-        Bookdto.setWriter(dto.getAuthor());
-        Bookdto.setPage(dto.getPage()); // 페이지에서 숫자만 남기고 제거
-        log.info("book DB작성완료");
-        return mapper.insBook(Bookdto);
+    public Long postBook(PlanTodoInsDto dto){
+        log.info("book DB작성");
+        PlanBookDto bookdto = new PlanBookDto();
+        bookdto.setWriter(dto.getAuthor());
+        bookdto.setPublisher(dto.getCompany());
+        bookdto.setTitle(dto.getTitle());
+        bookdto.setIcate(dto.getCate());
+        bookdto.setPage(dto.getPage());
+        bookdto.setIsbn(dto.getIsbn());
+        return mapper.insBook(bookdto);
     }
 
     public int postTodolist(PlanTodoInsDto dto, Long ibook) {
-        log.info("투두리스트 작성 시작");
-        PlanTodoDto todoDto = new PlanTodoDto();
-        todoDto.setIuser(dto.getIuser());
-        todoDto.setIbook(ibook);
-        todoDto.setStartDate(dto.getStart()); // 시작날짜
-        todoDto.setFinishedDate(dto.getEnd()); //완료(목표)날짜
-        todoDto.setDel_yn(dto.getDel());
-        todoDto.setFinish_yn(dto.getDel()); // 완료여부
-        todoDto.setBookmark(dto.getBookmark());
-        log.info("투두리스트 작성 완료");
-
-        return mapper.insTodoList(todoDto);
+        PlanTodoDto planDto = new PlanTodoDto();
+        planDto.setIbook(ibook);
+        planDto.setIuser(dto.getIuser());
+        planDto.setFinish_yn(dto.getFinish());
+        planDto.setIuser(dto.getIuser());
+        planDto.setStartDate(dto.getStart());
+        planDto.setFinishedDate(dto.getEnd());
+        planDto.setMemo(dto.getMemo());
+        planDto.setBookmark(dto.getBookmark());
+        return mapper.insTodoList(dto);
     }
 
     public int bookCategory(String eaAddCode){
 
         log.info("카테고리 분류 중");
-        int temp = 0;
-        if (eaAddCode.length() >= 3) {
-            temp = Integer.parseInt(eaAddCode.substring(2, 3)) + 1;
-        }
+        int temp;
+        temp = Integer.parseInt(eaAddCode.substring(2, 3)) + 1;
         return temp;
     }
 
+    public List<PlanBookDataDto> callapihttp(String result) { // api 호출
+        log.info("데이터 파싱");
+
+        JSONObject jsonObject = new JSONObject(result);
+        JSONArray jsonArray = jsonObject.getJSONArray("docs");
+
+        List<PlanBookDataDto> SerachBookList = new ArrayList<>();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            String publisher = obj.optString("PUBLISHER"); // 출판사 (발행자)
+            String eaAddCode = obj.optString("EA_ADD_CODE"); // 부가기호
+            String author = obj.optString("AUTHOR"); // 저자
+            String eaIsbn = obj.optString("EA_ISBN"); // isbn
+            String title = obj.optString("TITLE"); // 제목
+            String page = obj.optString("PAGE"); // 페이지수
+
+            PlanBookDataDto dto = new PlanBookDataDto();
+            dto.setCate(bookCategory(eaAddCode)); // 카테고리분류
+            dto.setIsbn(eaIsbn);
+            dto.setCompany(publisher);
+            dto.setTitle(title);
+            dto.setAuthor(author);
+            if (!page.equals("")) { // 페이지 수에서 숫자만 남기고 제거
+                String resultpage = page.replaceAll("[^0-9]", "");
+                dto.setPage(resultpage);
+            }
+            else dto.setPage(page);
+            SerachBookList.add(dto);
+
+        }
+        log.info("검색결과 리스트 작성 완료");
+        return SerachBookList;
+    }
 }
