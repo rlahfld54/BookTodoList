@@ -10,5 +10,5 @@ public class PlanBookDataDto {
     private String author; // 지은이
     private String company; // 출판사
     private String isbn; // isbn
-    private String totalpage;
+    private String page;
 }

@@ -38,11 +38,11 @@ public class TodoService {
         if (finishYn.equals("1")){
             dto.setFinish("완료");
         }else dto.setFinish("미완료");
-
         return dto;
-
     }
+
     public int UpdTodo(UpdTodoDto dto){
+
         return mapper.UpdTodo(dto);
     }
 

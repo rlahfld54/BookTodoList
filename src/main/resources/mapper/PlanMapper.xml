@@ -2,14 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.booktodolist.plan.PlanMapper">
 
-    <insert id="insBook">
+    <insert id="insBook" useGeneratedKeys="true" keyProperty="ibook">
         INSERT INTO book
         SET icate = #{icate}
         , title = #{title}
         , writer = #{writer}
         , publisher = #{publisher}
         , isbn = #{isbn}
-        , addcode = #{addcode}
     </insert>
 
     <insert id="insTodoList">
