@@ -56,7 +56,7 @@
         SET book_level = book_level+1,
         book_count = 0
         WHERE iuser = 1 and
-        book_count > 50;
+        book_count >=50;
     </update>
 
     <update id = "DelTodo">

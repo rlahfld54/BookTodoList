@@ -11,6 +11,6 @@ import java.util.List;
 @Mapper
 public interface PlanMapper {
     Long insBook(PlanBookDto dto);
-    int insTodoList(PlanTodoInsDto dto);
+    int insTodoList(PlanTodoDto dto);
     List<PlanBookDataDto> callapihttp();
 }

@@ -48,6 +48,7 @@ public class PlanService {
         bookdto.setPage(dto.getPage());
         bookdto.setIsbn(dto.getIsbn());
         return mapper.insBook(bookdto);
+
     }
 
     public int postTodolist(PlanTodoInsDto dto, Long ibook) {
@@ -60,7 +61,8 @@ public class PlanService {
         planDto.setFinishedDate(dto.getEnd());
         planDto.setMemo(dto.getMemo());
         planDto.setBookmark(dto.getBookmark());
-        return mapper.insTodoList(dto);
+
+        return mapper.insTodoList(planDto);
     }
 
     public int bookCategory(String eaAddCode){

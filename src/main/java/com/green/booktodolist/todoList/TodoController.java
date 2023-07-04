@@ -62,46 +62,5 @@ public class TodoController {
         return service.DelTodo(itodo);
     }
 
-    @GetMapping("/naver")
-    @Operation(summary = "api 연습")
-    public List<BookVo2> GetNaverBook(String text){
-        String clientId = "ncAR9prYDibH9NS7yQuA";
-        String clientSecret = "vl2B4Z4tvO";
 
-        URI uri = UriComponentsBuilder.fromUriString("https://openapi.naver.com")
-                .path("/v1/search/book.json")
-                .queryParam("query", text)
-                .queryParam("display", 100)
-                .queryParam("start", 1)
-                .queryParam("sort", "sim")
-                .encode()
-                .build()
-                .toUri();
-
-        // Spring 요청 제공 클래스
-        RequestEntity<Void> req = RequestEntity
-                .get(uri)
-                .header("X-Naver-Client-Id", clientId)
-                .header("X-Naver-Client-Secret", clientSecret)
-                .build();
-        // Spring 제공 restTemplate
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> resp = restTemplate.exchange(req, String.class);
-
-        // JSON 파싱 (Json 문자열을 객체로 만듦, 문서화)
-        ObjectMapper om = new ObjectMapper();
-        NaverResultVo resultVO = null;
-
-        try {
-            resultVO = om.readValue(resp.getBody(), NaverResultVo.class);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        List<BookVo2> books =resultVO.getItems();
-        //model.addAttribute("books", books);
-        return books;
-    }
 }

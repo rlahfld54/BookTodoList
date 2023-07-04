@@ -94,8 +94,4 @@ public class BestSellerController {
         return jsonPrintString;
     }
 
-    @PostMapping("/testPost")
-    public String testPost(){
-        return "성공";
-    }
 }
