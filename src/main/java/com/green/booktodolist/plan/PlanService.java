@@ -67,7 +67,13 @@ public class PlanService {
 
         log.info("카테고리 분류 중");
         int temp;
-        temp = Integer.parseInt(eaAddCode.substring(2, 3)) + 1;
+        if (eaAddCode.length() >= 3) {
+            char thirdChar = eaAddCode.charAt(2);
+            temp = Integer.parseInt(String.valueOf(thirdChar)) + 1;
+        } else {
+            temp = 11; // 오류 카테고리 코드
+        }
+        System.out.println(temp);
         return temp;
     }
 
