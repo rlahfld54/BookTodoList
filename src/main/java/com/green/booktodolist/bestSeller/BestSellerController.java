@@ -1,5 +1,6 @@
 package com.green.booktodolist.bestSeller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.booktodolist.bestSeller.model.BestSellerBook;
 import com.green.booktodolist.todoList.TodoService;
@@ -56,17 +57,17 @@ public class BestSellerController {
                         .build());
             }
             //List<BestSellerBook> numList = LinkedHashMap.values(map.get("item"));
-            System.out.println(numList.getClass().getName());  // java.util.ArrayList
-            System.out.println(bestSellerBookList.getClass().getName());  // java.util.ArrayList
+//            System.out.println(numList.getClass().getName());  // java.util.ArrayList
+//            System.out.println(bestSellerBookList.getClass().getName());  // java.util.ArrayList
 
             //TodoList에 있는 isbn이 있다면 여기서 삭제
             List<SelCategoryDto> icategoryList = this.GetMain().getIcategory();
-            System.out.println(icategoryList);
-
-            System.out.println("icategoryList : "+icategoryList.get(0).getIsbn());
-            System.out.println(numList.size());
-            System.out.println("numList : " + bestSellerBookList.get(0).getIsbn13());
-            System.out.println(icategoryList.get(0).getIsbn().equals(bestSellerBookList.get(0).getIsbn13()));
+//            System.out.println(icategoryList);
+//
+//            System.out.println("icategoryList : "+icategoryList.get(0).getIsbn());
+//            System.out.println(numList.size());
+//            System.out.println("numList : " + bestSellerBookList.get(0).getIsbn13());
+//            System.out.println(icategoryList.get(0).getIsbn().equals(bestSellerBookList.get(0).getIsbn13()));
 
             for (int i = 0; i < bestSellerBookList.size(); i++) {
                 for (int j = 0; j < icategoryList.size(); j++) {
@@ -94,8 +95,4 @@ public class BestSellerController {
         return jsonPrintString;
     }
 
-    @PostMapping("/testPost")
-    public String testPost(){
-        return "성공";
-    }
 }
