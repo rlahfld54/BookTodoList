@@ -9,10 +9,12 @@ public class SelDetailDto {
     private String catename;
     private String title;
     private String writer;
+    private String publisher;
     private String start;
     private String end;
     private String memo;
     private String finish;
+
 
 
 }

@@ -17,5 +17,4 @@ public interface TodoMapper {
 
     int DelTodo(DelTodoDto dto);
 
-
 }

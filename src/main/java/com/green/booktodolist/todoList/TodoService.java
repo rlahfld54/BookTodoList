@@ -16,11 +16,11 @@ public class TodoService {
 
     public SelMainVo selMain(){
 
-
         int level = mapper.selUserLevel();
         int count = mapper.selUserCount();
 
         List<SelCategoryDto> selcategorylist = mapper.selcategorylist();
+
         for (int i = 0; i <selcategorylist.size(); i++) {
             if (selcategorylist.get(i).getFinish().equals("0")){
                 selcategorylist.get(i).setFinish("미완료");
@@ -43,15 +43,16 @@ public class TodoService {
     }
 
     public int UpdTodo(UpdTodoDto dto){
-
-        if (dto.getFinish()== 1){
+        if (dto.getFinish().equals("완료")){
+            dto.setFinish("1");
+        }else if (dto.getFinish().equals("미완료")){
+            dto.setFinish("0");
+        }
+        if (dto.getFinish().equals("1")){
             mapper.UpdCount();
             mapper.UpdLevel();
         }
-
         return  mapper.UpdTodo(dto);
-
-
     }
 
     public int DelTodo(int itodo){
