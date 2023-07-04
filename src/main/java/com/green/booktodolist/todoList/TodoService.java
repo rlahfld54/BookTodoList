@@ -18,6 +18,7 @@ public class TodoService {
 
 
         int level = mapper.selUserLevel();
+        int count = mapper.selUserCount();
 
         List<SelCategoryDto> selcategorylist = mapper.selcategorylist();
         for (int i = 0; i <selcategorylist.size(); i++) {
@@ -28,7 +29,7 @@ public class TodoService {
             }
         }
 
-        return SelMainVo.builder().level(level).icategory(selcategorylist).build();
+        return SelMainVo.builder().level(level).count(count).icategory(selcategorylist).build();
 
     }
     public SelDetailDto selDetail(int itodo){
@@ -43,7 +44,14 @@ public class TodoService {
 
     public int UpdTodo(UpdTodoDto dto){
 
-        return mapper.UpdTodo(dto);
+        if (dto.getFinish()== 1){
+            mapper.UpdCount();
+            mapper.UpdLevel();
+        }
+
+        return  mapper.UpdTodo(dto);
+
+
     }
 
     public int DelTodo(int itodo){

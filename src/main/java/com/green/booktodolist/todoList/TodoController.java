@@ -63,6 +63,7 @@ public class TodoController {
     }
 
     @GetMapping("/naver")
+    @Operation(summary = "api 연습")
     public List<BookVo2> GetNaverBook(String text){
         String clientId = "ncAR9prYDibH9NS7yQuA";
         String clientSecret = "vl2B4Z4tvO";

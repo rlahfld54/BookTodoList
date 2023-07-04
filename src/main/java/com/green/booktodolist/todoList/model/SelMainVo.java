@@ -9,5 +9,6 @@ import java.util.List;
 @Builder
 public class SelMainVo {
     private int level;
+    private int count;
     List<SelCategoryDto> icategory;
 }
