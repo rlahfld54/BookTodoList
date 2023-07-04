@@ -8,6 +8,12 @@
         where iuser = 1;
     </select>
 
+    <select id="selUserCount">
+        select book_count
+        from b_user
+        where iuser = 1;
+    </select>
+
     <select id="selcategorylist">
         SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn finish,A.del_yn del ,A.memo,
         date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d') end,C.color,B.isbn
@@ -36,6 +42,20 @@
         finished_date = #{end},
         finish_yn = #{finish}
         WHERE itodo = #{itodo}
+    </update>
+
+    <update id="UpdCount">
+        UPDATE b_user
+        SET book_count = book_count+10
+        WHERE iuser = 1;
+    </update>
+
+    <update id="UpdLevel">
+        UPDATE b_user
+        SET book_level = book_level+1,
+        book_count = 0
+        WHERE iuser = 1 and
+        book_count > 50;
     </update>
 
     <update id = "DelTodo">

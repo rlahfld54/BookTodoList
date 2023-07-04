@@ -64,15 +64,19 @@ public class PlanService {
     }
 
     public int bookCategory(String eaAddCode){
-
-        log.info("카테고리 분류 중");
         int temp;
-        temp = Integer.parseInt(eaAddCode.substring(2, 3)) + 1;
+        if (eaAddCode.length() >= 3) {
+            char thirdChar = eaAddCode.charAt(2);
+            temp = Integer.parseInt(String.valueOf(thirdChar)) + 1;
+        } else {
+            temp = 11; // 오류 카테고리 코드
+        }
+        System.out.println(temp);
         return temp;
     }
 
     public List<PlanBookDataDto> callapihttp(String result) { // api 호출
-        log.info("데이터 파싱");
+        log.info("데이터 파싱 시작");
 
         JSONObject jsonObject = new JSONObject(result);
         JSONArray jsonArray = jsonObject.getJSONArray("docs");
@@ -98,8 +102,9 @@ public class PlanService {
                 String resultpage = page.replaceAll("[^0-9]", "");
                 dto.setPage(resultpage);
             }
-            else dto.setPage(page);
+            else dto.setPage(page); // 페이지 정보 없는 책은 "" 공백처리
             SerachBookList.add(dto);
+            log.info("데이터 파싱 완료");
 
         }
         log.info("검색결과 리스트 작성 완료");
