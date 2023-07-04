@@ -85,7 +85,5 @@ public class PlanController {
         Long ibook = service.postBook(dto); // ibook
         return service.postTodolist(dto, ibook); // todolist
     }
-
-
 }
 

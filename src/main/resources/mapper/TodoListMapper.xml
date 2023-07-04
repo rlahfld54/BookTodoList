@@ -15,7 +15,7 @@
     </select>
 
     <select id="selcategorylist">
-        SELECT C.cate_name,A.itodo,B.title,A.bookmark,A.finish_yn finish,A.del_yn del ,A.memo,
+        SELECT C.cate_name,A.itodo,B.title,A.bookmark, B.totalpage,A.finish_yn finish,A.del_yn del ,A.memo,
         date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d') end,C.color,B.isbn
         FROM b_list A
         INNER JOIN book B
@@ -27,7 +27,7 @@
 
     <select id="selDetail">
         SELECT date_format(A.created_todo_date, '%Y-%m-%d') createdTodo , C.cate_name catename ,B.title,B.writer,
-        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d')end,A.memo,A.finish_yn finish
+        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d')end,A.memo,A.finish_yn finish,B.publisher
         FROM b_list A
         INNER JOIN book B
         ON A.ibook = B.ibook
@@ -40,7 +40,8 @@
         UPDATE b_list
         SET start_date = #{start},
         finished_date = #{end},
-        finish_yn = #{finish}
+        finish_yn = #{finish},
+        memo = #{memo}
         WHERE itodo = #{itodo}
     </update>
 
@@ -55,7 +56,7 @@
         SET book_level = book_level+1,
         book_count = 0
         WHERE iuser = 1 and
-        book_count > 50;
+        book_count >=50;
     </update>
 
     <update id = "DelTodo">
