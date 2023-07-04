@@ -47,7 +47,7 @@ public class TodoController {
         return service.selDetail(itodo);
     }
 
-    @PostMapping
+    @PostMapping("/{itodo}")
     @Operation(summary = "투두 수정",description = "start: 투두시작날짜 예시: 2022-06-29  \n " +
             "end: 투두종료 날짜 예시:2022-07-01  \n " +
             "finish: 1이면 완료 0이면 미완료  \n " +
@@ -104,6 +104,4 @@ public class TodoController {
         //model.addAttribute("books", books);
         return books;
     }
-
-
 }
