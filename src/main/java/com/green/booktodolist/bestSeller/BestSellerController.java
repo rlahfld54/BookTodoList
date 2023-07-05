@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/aladinbestseller")
 public class BestSellerController {
@@ -54,8 +53,10 @@ public class BestSellerController {
                                 .priceStandard((int)item.get("priceStandard"))
                                 .cover((String)item.get("cover"))
                                 .categoryName((String)item.get("categoryName"))
+                                .publisher((String) item.get("publisher"))
                         .build());
             }
+
             //List<BestSellerBook> numList = LinkedHashMap.values(map.get("item"));
 //            System.out.println(numList.getClass().getName());  // java.util.ArrayList
 //            System.out.println(bestSellerBookList.getClass().getName());  // java.util.ArrayList
