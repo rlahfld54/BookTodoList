@@ -53,13 +53,9 @@ public class TodoController {
     public int PatchTodo(@RequestBody UpdTodoDto dto){
         return service.UpdTodo(dto);
     }
-
-
     @DeleteMapping("/{itodo}")
     @Operation(summary = "투두 삭제",description = "삭제 하고 싶은 itodo 값 (2~33 사이의 숫자)")
     public int DelTodo(@PathVariable int itodo){
         return service.DelTodo(itodo);
     }
-
-
 }

@@ -66,12 +66,14 @@ public class TodoService {
         }
 
         if (selTodo.getFinish().equals("0") && dto.getFinish().equals("1")){
+
             mapper.UpdCount(count);
             mapper.UpdLevel();
         }
 
         return  mapper.UpdTodo(dto);
     }
+
     public int DelTodo(int itodo){
         DelTodoDto dto = new DelTodoDto();
         dto.setItodo(itodo);
