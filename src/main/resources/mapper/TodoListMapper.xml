@@ -45,9 +45,15 @@
         WHERE itodo = #{itodo}
     </update>
 
+    <select id = "selTodo">
+        select start_date start, finished_date end, memo, finish_yn finish
+        from b_list
+        where itodo = #{itodo}
+    </select>
+
     <update id="UpdCount">
         UPDATE b_user
-        SET book_count = book_count+10
+        SET book_count = book_count + #{num}
         WHERE iuser = 1;
     </update>
 
@@ -56,7 +62,7 @@
         SET book_level = book_level+1,
         book_count = 0
         WHERE iuser = 1 and
-        book_count >=50;
+        book_count >= 50 * book_level;
     </update>
 
     <update id = "DelTodo">
