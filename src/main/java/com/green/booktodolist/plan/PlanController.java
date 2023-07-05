@@ -22,7 +22,8 @@ import java.util.List;
 public class PlanController {
 
     private final PlanService service;
-    private int tmep_cate;
+
+
     @Autowired
     public PlanController(PlanService service) {
         this.service = service;
@@ -41,8 +42,12 @@ public class PlanController {
 
         String apiKey = "e7e239ae4128719a998e3a31ab3041b1a2cc0b014e95d5f4f2914e3187bbdc29"; // 인증키
         String result = null;
+
+        final int PAGE_SIZE = 30;
+        final int PAGE_NO = 1;
         try {
             result = URLEncoder.encode(str, "UTF-8");
+
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패", e);
         }
