@@ -112,7 +112,6 @@ public class PlanService {
             else dto.setPage(null); // 페이지 정보 없는 책은 "" 공백처리
             SerachBookList.add(dto);
             log.info("데이터 파싱 완료");
-
         }
         log.info("검색결과 리스트 작성 완료");
         return SerachBookList;

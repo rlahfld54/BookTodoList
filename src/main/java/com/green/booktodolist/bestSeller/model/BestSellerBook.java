@@ -15,4 +15,5 @@ public class BestSellerBook {
     private int priceStandard;
     private String cover;
     private String categoryName;
+    private String publisher;
 }

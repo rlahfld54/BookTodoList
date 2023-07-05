@@ -16,7 +16,6 @@ import java.net.URLEncoder;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/plan")
 public class PlanController {

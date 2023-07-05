@@ -15,8 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/todo")
 public class TodoController {
@@ -47,14 +45,15 @@ public class TodoController {
         return service.selDetail(itodo);
     }
 
-    @PostMapping("/{itodo}")
+    @PatchMapping("/{itodo}")
     @Operation(summary = "투두 수정",description = "start: 투두시작날짜 예시: 2022-06-29  \n " +
             "end: 투두종료 날짜 예시:2022-07-01  \n " +
             "finish: 1이면 완료 0이면 미완료  \n " +
             "itodo: 수정하고 싶은 itodo 값 2~33사이 \n ")
-    public int PostTodo(@RequestBody UpdTodoDto dto){
+    public int PatchTodo(@RequestBody UpdTodoDto dto){
         return service.UpdTodo(dto);
     }
+
 
     @DeleteMapping("/{itodo}")
     @Operation(summary = "투두 삭제",description = "삭제 하고 싶은 itodo 값 (2~33 사이의 숫자)")
