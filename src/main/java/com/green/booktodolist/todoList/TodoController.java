@@ -50,7 +50,7 @@ public class TodoController {
             "end: 투두종료 날짜 예시:2022-07-01  \n " +
             "finish: 1이면 완료 0이면 미완료  \n " +
             "itodo: 수정하고 싶은 itodo 값 2~33사이 \n ")
-    public int PutTodo(@RequestBody UpdTodoDto dto){
+    public int PatchTodo(@RequestBody UpdTodoDto dto){
         return service.UpdTodo(dto);
     }
 
