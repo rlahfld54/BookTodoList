@@ -4,6 +4,7 @@ import com.green.booktodolist.todoList.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class TodoService {
@@ -43,18 +44,34 @@ public class TodoService {
     }
 
     public int UpdTodo(UpdTodoDto dto){
+
+        int count = (int) (Math.random() * 10) + 1;
+        System.out.println(count);
+        SelDetailDto selTodo = mapper.selTodo(dto.getItodo());
+
+        if (dto.getStart().equals("") ||dto.getEnd().equals("") || dto.getMemo().equals("") ){
+            if (dto.getStart().equals("")){
+                dto.setStart(selTodo.getStart());
+            }if (dto.getMemo().equals("")) {
+                dto.setMemo(selTodo.getMemo());
+            }if (dto.getEnd().equals("")){
+                dto.setEnd(selTodo.getEnd());
+            }
+        }
+
         if (dto.getFinish().equals("완료")){
             dto.setFinish("1");
         }else if (dto.getFinish().equals("미완료")){
             dto.setFinish("0");
         }
-        if (dto.getFinish().equals("1")){
-            mapper.UpdCount();
+
+        if (selTodo.getFinish().equals("0") && dto.getFinish().equals("1")){
+            mapper.UpdCount(count);
             mapper.UpdLevel();
         }
+
         return  mapper.UpdTodo(dto);
     }
-
     public int DelTodo(int itodo){
         DelTodoDto dto = new DelTodoDto();
         dto.setItodo(itodo);
