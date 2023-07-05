@@ -45,7 +45,7 @@ public class PlanService {
         bookdto.setPublisher(dto.getCompany());
         bookdto.setTitle(dto.getTitle());
         bookdto.setIcate(Integer.parseInt(dto.getCate()));
-        bookdto.setPage(dto.getPage());
+        bookdto.setPage(dto.getTotal());
         bookdto.setIsbn(dto.getIsbn());
         mapper.insBook(bookdto);
         log.info("book DB작성완료");
@@ -53,12 +53,12 @@ public class PlanService {
     }
 
     public int postTodolist(PlanTodoInsDto dto, Long ibook) {
+        final int IUSER = 1;
         System.out.println("테스트 : " +ibook);
         log.info("todolist DB 작성시작");
         PlanTodoDto planDto = new PlanTodoDto();
-        planDto.setIuser(dto.getIuser());
+        planDto.setIuser(IUSER);
         planDto.setFinish_yn(dto.getFinish());
-        planDto.setIuser(dto.getIuser());
         planDto.setStart(dto.getStart());
         planDto.setEnd(dto.getEnd());
         planDto.setMemo(dto.getMemo());
@@ -117,4 +117,5 @@ public class PlanService {
         log.info("검색결과 리스트 작성 완료");
         return SerachBookList;
     }
+
 }

@@ -9,13 +9,11 @@ public class PlanTodoInsDto {
     private String cate;
     private String company;
     private int del;
+    private String end;
     private int finish;
+    private String isbn;
     private String memo;
     private String start;
-    private String end;
     private String title;
-    private String page;
-    private String isbn;
-    private int iuser;
-    private Long ibook;
+    private String total;
 }
