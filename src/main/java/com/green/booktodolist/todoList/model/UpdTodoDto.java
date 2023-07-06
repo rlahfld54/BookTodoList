@@ -8,5 +8,6 @@ public class UpdTodoDto {
     private String end;
     private String finish;
     private String memo;
+    private String bookmark;
     private int itodo;
 }

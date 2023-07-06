@@ -47,7 +47,8 @@
         SET start_date = #{start},
         finished_date = #{end},
         finish_yn = #{finish},
-        memo = #{memo}
+        memo = #{memo},
+        bookmark = #{bookmark}
         WHERE itodo = #{itodo}
     </update>
 
