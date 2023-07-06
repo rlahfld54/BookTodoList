@@ -1,10 +1,13 @@
 package com.green.booktodolist.bestSeller.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class BestSellerBook {
     private String title;
     private String link;
@@ -14,6 +17,7 @@ public class BestSellerBook {
     private String isbn13;
     private int priceStandard;
     private String cover;
-    private String categoryName;
+    private int categoryName;
     private String publisher;
+    private int totalpage;
 }
