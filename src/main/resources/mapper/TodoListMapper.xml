@@ -35,6 +35,13 @@
         ON B.icate = C.icate
         WHERE itodo = #{itodo}
     </select>
+    <update id="updfinish">
+
+        UPDATE b_list
+        set finish_yn = #{finish}
+        where itodo = #{itodo}
+
+    </update>
 
     <update id="UpdTodo">
         UPDATE b_list
@@ -53,7 +60,7 @@
 
     <update id="UpdCount">
         UPDATE b_user
-        SET book_count = book_count + #{num}
+        SET book_count = book_count + 1
         WHERE iuser = 1;
     </update>
 
@@ -62,7 +69,7 @@
         SET book_level = book_level+1,
         book_count = 0
         WHERE iuser = 1 and
-        book_count >= 50;
+        book_count >= 10;
     </update>
 
     <update id = "DelTodo">

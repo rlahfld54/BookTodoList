@@ -37,6 +37,11 @@ public class TodoController {
     public SelMainVo GetMain(){
         return service.selMain();
     }
+    @PatchMapping
+    @Operation(summary = "완료처리")
+    public int PatchFinish(@RequestBody Updfinish dto){
+        return service.updfinish(dto);
+    }
 
     @GetMapping("/{itodo}")
     @Operation(summary = "상세조회",description = "상세 조회 하고 싶은 itodo 의 값 2~33사이")
