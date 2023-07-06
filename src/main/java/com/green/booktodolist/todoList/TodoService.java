@@ -28,6 +28,9 @@ public class TodoService {
             } else {
                 selcategorylist.get(i).setFinish("완료");
             }
+            if (selcategorylist.get(i).getTotalpage().equals("")){
+                selcategorylist.get(i).setTotalpage(null);
+            }
         }
 
         return SelMainVo.builder().level(level).count(count).icategory(selcategorylist).build();
