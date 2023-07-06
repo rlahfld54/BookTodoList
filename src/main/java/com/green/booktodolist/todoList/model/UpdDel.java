@@ -3,7 +3,7 @@ package com.green.booktodolist.todoList.model;
 import lombok.Data;
 
 @Data
-public class Updfinish {
+public class UpdDel {
     private int itodo;
-    private String finish;
+    private int del;
 }

@@ -1,19 +1,9 @@
 package com.green.booktodolist.todoList;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.booktodolist.todoList.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/todo")
@@ -39,8 +29,8 @@ public class TodoController {
     }
     @PatchMapping
     @Operation(summary = "완료처리")
-    public int PatchFinish(@RequestBody Updfinish dto){
-        return service.updfinish(dto);
+    public int PatchDel(@RequestBody UpdDel dto){
+        return service.updel(dto);
     }
 
     @GetMapping("/{itodo}")

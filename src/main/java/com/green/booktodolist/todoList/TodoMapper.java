@@ -11,7 +11,7 @@ public interface TodoMapper {
     int selUserCount();
     List<SelCategoryDto> selcategorylist();
     SelDetailDto selDetail(int itodo);
-    int updfinish(Updfinish dto);
+    int updel(UpdDel dto);
     int updTodo(UpdTodoDto dto);
     SelDetailDto  selTodo(int itodo);
 

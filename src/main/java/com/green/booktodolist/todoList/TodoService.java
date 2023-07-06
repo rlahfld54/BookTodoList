@@ -4,7 +4,6 @@ import com.green.booktodolist.todoList.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class TodoService {
@@ -33,20 +32,8 @@ public class TodoService {
         return SelMainVo.builder().level(level).count(count).icategory(selcategorylist).build();
 
     }
-    public int updfinish(Updfinish dto){
-        if (dto.getFinish().equals("완료")){
-            dto.setFinish("1");
-        }else {
-            dto.setFinish("0");
-        }
-        SelDetailDto selTodo = mapper.selTodo(dto.getItodo());
-
-        if (selTodo.getFinish().equals("0") && dto.getFinish().equals("1")){
-            mapper.updCount();
-            mapper.updLevel();
-        }
-
-        return mapper.updfinish(dto);
+    public int updel(UpdDel dto){
+        return mapper.updel(dto);
     }
 
     public SelDetailDto selDetail(int itodo){
