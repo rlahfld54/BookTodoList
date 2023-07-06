@@ -28,14 +28,11 @@ public class TodoService {
                 selcategorylist.get(i).setFinish("완료");
             }
         }
-
         return SelMainVo.builder().level(level).count(count).icategory(selcategorylist).build();
-
     }
     public int updel(UpdDel dto){
         return mapper.updel(dto);
     }
-
     public SelDetailDto selDetail(int itodo){
         SelDetailDto dto = mapper.selDetail(itodo);
         dto.setItodo(itodo);

@@ -27,13 +27,14 @@
 
     <select id="selDetail">
         SELECT date_format(A.created_todo_date, '%Y-%m-%d') createdTodo , C.cate_name catename ,B.title,B.writer,
-        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d')end,A.memo,A.finish_yn finish,B.publisher
+        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d')end,A.memo,A.finish_yn finish,B.publisher,A.bookmark
         FROM b_list A
         INNER JOIN book B
         ON A.ibook = B.ibook
         INNER JOIN icategory C
         ON B.icate = C.icate
         WHERE itodo = #{itodo}
+
     </select>
     <update id="updel">
         UPDATE b_list
@@ -58,7 +59,7 @@
 
     <update id="UpdCount">
         UPDATE b_user
-        SET book_count = book_count + 1
+        SET book_count = book_count + 10
         WHERE iuser = 1;
     </update>
 
@@ -67,7 +68,7 @@
         SET book_level = book_level+1,
         book_count = 0
         WHERE iuser = 1 and
-        book_count >= 10;
+        book_count >= 100;
     </update>
 
     <update id = "DelTodo">

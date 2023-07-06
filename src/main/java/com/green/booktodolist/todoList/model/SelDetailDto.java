@@ -14,4 +14,5 @@ public class SelDetailDto {
     private String end;
     private String memo;
     private String finish;
+    private String bookmark;
 }
