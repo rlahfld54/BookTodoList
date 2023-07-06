@@ -14,7 +14,7 @@ public class SelCategoryDto {
     private int bookmark;
     private String totalpage;
     private int del;
-    private String finish;
+    private int finish;
     private String start;
     private String end;
     private String color;

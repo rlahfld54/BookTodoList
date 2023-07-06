@@ -20,15 +20,8 @@ public class TodoService {
         int count = mapper.selUserCount();
 
         List<SelCategoryDto> selcategorylist = mapper.selcategorylist();
-
-        for (int i = 0; i <selcategorylist.size(); i++) {
-            if (selcategorylist.get(i).getFinish().equals("0")){
-                selcategorylist.get(i).setFinish("미완료");
-            } else {
-                selcategorylist.get(i).setFinish("완료");
-            }
-        }
         return SelMainVo.builder().level(level).count(count).icategory(selcategorylist).build();
+
     }
     public int updel(UpdDel dto){
         return mapper.updel(dto);
@@ -37,10 +30,12 @@ public class TodoService {
         SelDetailDto dto = mapper.selDetail(itodo);
         dto.setItodo(itodo);
         String finishYn = dto.getFinish();
+
         if (finishYn.equals("1")){
             dto.setFinish("완료");
         }else dto.setFinish("미완료");
         return dto;
+
     }
 
     public int UpdTodo(UpdTodoDto dto){

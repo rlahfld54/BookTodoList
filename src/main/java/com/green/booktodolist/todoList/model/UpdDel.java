@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class UpdDel {
     private int itodo;
-    private int del;
+    private int finish;
 }

@@ -38,7 +38,7 @@
     </select>
     <update id="updel">
         UPDATE b_list
-        set del_yn = #{del}
+        set finish_yn = #{finish}
         where itodo = #{itodo}
     </update>
 
