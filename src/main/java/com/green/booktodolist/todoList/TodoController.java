@@ -30,7 +30,7 @@ public class TodoController {
     }
 
     @PatchMapping
-    @Operation(summary = "삭제처리")
+    @Operation(summary = "완료처리")
     public int PatchDel(@RequestBody UpdDel dto){
         return service.updel(dto);
     }

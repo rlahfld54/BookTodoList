@@ -6,7 +6,6 @@ import lombok.Data;
 public class UpdTodoDto {
     private String start;
     private String end;
-    private String finish;
     private String memo;
     private String bookmark;
     private int itodo;

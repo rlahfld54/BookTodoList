@@ -46,7 +46,6 @@
         UPDATE b_list
         SET start_date = #{start},
         finished_date = #{end},
-        finish_yn = #{finish},
         memo = #{memo},
         bookmark = #{bookmark}
         WHERE itodo = #{itodo}
@@ -58,13 +57,13 @@
         where itodo = #{itodo}
     </select>
 
-    <update id="UpdCount">
+    <update id="updCount">
         UPDATE b_user
         SET book_count = book_count + 10
         WHERE iuser = 1;
     </update>
 
-    <update id="UpdLevel">
+    <update id="updLevel">
         UPDATE b_user
         SET book_level = book_level+1,
         book_count = 0
