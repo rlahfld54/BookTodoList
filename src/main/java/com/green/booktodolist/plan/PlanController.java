@@ -73,6 +73,7 @@ public class PlanController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         result = requestApi.toString();
 
         return service.callapihttp(result);
@@ -84,5 +85,5 @@ public class PlanController {
         Long ibook = service.postBook(dto); // ibook
         return service.postTodolist(dto, ibook); // todolist
     }
-}
 
+}

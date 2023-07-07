@@ -22,6 +22,7 @@
         on A.ibook = B.ibook
         INNER JOIN icategory C
         ON B.icate = C.icate
+        WHERE del_yn = 0
         ORDER BY C.cate_name,A.itodo
     </select>
 
@@ -34,7 +35,6 @@
         INNER JOIN icategory C
         ON B.icate = C.icate
         WHERE itodo = #{itodo}
-
     </select>
     <update id="updel">
         UPDATE b_list
