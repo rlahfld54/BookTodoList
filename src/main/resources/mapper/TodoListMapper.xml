@@ -61,7 +61,7 @@
         UPDATE b_user
         SET book_count = book_count + #{num}
         WHERE iuser = 1 and
-        book_count >= 0
+        book_count > 0
     </update>
 
 
