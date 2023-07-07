@@ -49,6 +49,7 @@
         memo = #{memo},
         bookmark = #{bookmark}
         WHERE itodo = #{itodo}
+
     </update>
 
     <select id = "selTodo">
@@ -57,12 +58,20 @@
         where itodo = #{itodo}
     </select>
 
-    <update id="updCount">
+    <update id="countUp">
+        UPDATE b_user
+        SET book_count = book_count + #{num}
+        WHERE iuser = 1 and
+        book_count >=0
+    </update>
+
+    <update id="countDown">
         UPDATE b_user
         SET book_count = book_count + #{num}
         WHERE iuser = 1 and
         book_count > 0
     </update>
+
 
 
     <update id="updLevel">

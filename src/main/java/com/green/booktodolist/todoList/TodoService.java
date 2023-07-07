@@ -25,15 +25,14 @@ public class TodoService {
     }
     public int updel(UpdDel dto){
         SelDetailDto selTodo = mapper.selTodo(dto.getItodo());
-        int num = 0;
+        final int countup =10;
+        final int countdown = -10;
 
         if (selTodo.getFinish().equals("0") && dto.getFinish()==1){
-            num =10;
-            mapper.updCount(num);
+            mapper.countUp(countup);
             mapper.updLevel();
         }else if(selTodo.getFinish().equals("1") && dto.getFinish()==0){
-            num = -10;
-            mapper.updCount(num);
+            mapper.countDown(countdown);
         }
         return mapper.updel(dto);
     }
