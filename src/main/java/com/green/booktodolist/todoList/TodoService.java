@@ -25,19 +25,24 @@ public class TodoService {
     }
     public int updel(UpdDel dto){
         SelDetailDto selTodo = mapper.selTodo(dto.getItodo());
-        System.out.println(selTodo.getFinish());
-        System.out.println(dto.getFinish());
+        int num = 0;
 
         if (selTodo.getFinish().equals("0") && dto.getFinish()==1){
-            mapper.updCount();
+            num =10;
+            mapper.updCount(num);
             mapper.updLevel();
+        }else if(selTodo.getFinish().equals("1") && dto.getFinish()==0){
+            num = -10;
+            mapper.updCount(num);
         }
         return mapper.updel(dto);
     }
 
     public SelDetailDto selDetail(int itodo){
+
         SelDetailDto dto = mapper.selDetail(itodo);
         dto.setItodo(itodo);
+
         String finishYn = dto.getFinish();
 
         if (finishYn.equals("1")){
@@ -48,20 +53,20 @@ public class TodoService {
     }
 
     public int UpdTodo(UpdTodoDto dto){
-
         SelDetailDto selTodo = mapper.selTodo(dto.getItodo());
 
-        if (dto.getStart().equals("") ||dto.getEnd().equals("") || dto.getMemo().equals("") ){
+        if (dto.getStart().equals("") ||dto.getEnd().equals("") || dto.getMemo().equals("") || dto.getBookmark().equals("")){
+
             if (dto.getStart().equals("")){
                 dto.setStart(selTodo.getStart());
             }if (dto.getMemo().equals("")) {
                 dto.setMemo(selTodo.getMemo());
             }if (dto.getEnd().equals("")){
                 dto.setEnd(selTodo.getEnd());
-            }
-            if(dto.getBookmark().equals("")){
+            }if(dto.getBookmark().equals("")){
                 dto.setBookmark(selTodo.getBookmark());
             }
+
         }
 
         return  mapper.updTodo(dto);

@@ -52,24 +52,27 @@
     </update>
 
     <select id = "selTodo">
-        select start_date start, finished_date end, memo, finish_yn finish
+        select start_date start, finished_date end, memo, finish_yn finish, bookmark
         from b_list
         where itodo = #{itodo}
     </select>
 
     <update id="updCount">
         UPDATE b_user
-        SET book_count = book_count + 10
-        WHERE iuser = 1;
+        SET book_count = book_count + #{num}
+        WHERE iuser = 1 and
+        book_count >= 0
     </update>
+
 
     <update id="updLevel">
         UPDATE b_user
         SET book_level = book_level+1,
         book_count = 0
         WHERE iuser = 1 and
-        book_count >= 100;
+        book_count >= 100
     </update>
+
 
     <update id = "DelTodo">
         update b_list
