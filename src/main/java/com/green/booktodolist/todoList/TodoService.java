@@ -32,7 +32,6 @@ public class TodoService {
             mapper.updCount();
             mapper.updLevel();
         }
-
         return mapper.updel(dto);
     }
 
@@ -64,7 +63,6 @@ public class TodoService {
                 dto.setBookmark(selTodo.getBookmark());
             }
         }
-
 
         return  mapper.updTodo(dto);
     }

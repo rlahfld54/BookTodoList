@@ -42,7 +42,7 @@
         where itodo = #{itodo}
     </update>
 
-    <update id="UpdTodo">
+    <update id="updTodo">
         UPDATE b_list
         SET start_date = #{start},
         finished_date = #{end},

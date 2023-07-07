@@ -13,8 +13,8 @@ public interface TodoMapper {
     SelDetailDto selDetail(int itodo);
     int updel(UpdDel dto);
     int updTodo(UpdTodoDto dto);
-    SelDetailDto  selTodo(int itodo);
 
+    SelDetailDto  selTodo(int itodo);
     int updCount();
     int updLevel();
 
