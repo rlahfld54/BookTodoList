@@ -79,7 +79,7 @@ public class PlanController {
         return service.callapihttp(result);
     }
 
-    @PostMapping("/Todolist")
+    @PostMapping("/todolist")
     @Operation(summary = "투두리스트 작성")
     public int postTodolist(@RequestBody PlanTodoInsDto dto){
         Long ibook = service.postBook(dto); // ibook
