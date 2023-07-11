@@ -1,10 +1,7 @@
 package com.green.booktodolist.bestSeller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.booktodolist.bestSeller.model.BestSellerBook;
-import com.green.booktodolist.plan.PlanMapper;
-import com.green.booktodolist.plan.model.PlanBookDto;
 import com.green.booktodolist.todoList.TodoService;
 import com.green.booktodolist.todoList.model.SelCategoryDto;
 import com.green.booktodolist.todoList.model.SelMainVo;
@@ -49,7 +46,7 @@ public class BestSellerController {
             for(LinkedHashMap<String, Object> item : numList) {
 
                 if(item.get("isbn13") != ""){
-                    // ibook 테이블에 저장하기
+                    // ibook 테이블에 저장하기 -- 검색할때 비슷한 책이 많으면 검색이 안되서 방지해주기 위해 limit 30개여서...있는책도 없는 현상이 나옴..
                     bestSellerMapper.insertBestseller(
                             BestSellerBook.builder()
                                     .categoryName(11)
