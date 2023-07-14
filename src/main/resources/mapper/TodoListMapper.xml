@@ -15,8 +15,8 @@
     </select>
 
     <select id="selcategorylist">
-        SELECT C.cate_name,A.itodo,B.title,A.bookmark, B.totalpage,A.finish_yn finish,A.del_yn del ,A.memo,
-        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d') end,C.color,B.isbn
+        SELECT A.itodo,B.title,A.bookmark, B.totalpage,A.finish_yn finish,A.memo,
+        date_format(A.start_date, '%Y-%m-%d') start,date_format(A.finished_date, '%Y-%m-%d') end
         FROM b_list A
         INNER JOIN book B
         on A.ibook = B.ibook

@@ -35,7 +35,7 @@ public class CalendarService {
             dto.setTitle(icategoryList.get(i).getTitle());
             dto.setStart(icategoryList.get(i).getStart());
             dto.setEnd(icategoryList.get(i).getEnd());
-            dto.setColor(icategoryList.get(i).getColor());
+//            dto.setColor(icategoryList.get(i).getColor());
             calendarList.add(i,dto);
         }
 

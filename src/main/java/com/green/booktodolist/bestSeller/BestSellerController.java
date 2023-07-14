@@ -79,16 +79,16 @@ public class BestSellerController {
 
             List<SelCategoryDto> icategoryList = this.GetMain().getIcategory();
             System.out.println("icategoryList : "+this.GetMain().getIcategory()); // 추후에 테스트 확인
-            for (int i = 0; i < bestSellerBookList.size(); i++) {
-                for (int j = 0; j < icategoryList.size(); j++) {
-                    if(icategoryList.get(j).getIsbn().equals(bestSellerBookList.get(i).getIsbn13())){ // 수정이 잦다 링크드 리스트 써라....
-                        System.out.println(bestSellerBookList.get(i));
-                        // 중복된 책 제거
-                        bestSellerBookList.remove(i);
-                        System.out.println("중복된 책 제거 완료 !!!");
-                    }
-                }
-            }
+//            for (int i = 0; i < bestSellerBookList.size(); i++) {
+//                for (int j = 0; j < icategoryList.size(); j++) {
+//                    if(icategoryList.get(j).getIsbn().equals(bestSellerBookList.get(i).getIsbn13())){ // 수정이 잦다 링크드 리스트 써라....
+//                        System.out.println(bestSellerBookList.get(i));
+//                        // 중복된 책 제거
+//                        bestSellerBookList.remove(i);
+//                        System.out.println("중복된 책 제거 완료 !!!");
+//                    }
+//                }
+//            }
 
             // 배열 이니까 random으로 순서 바꿔놓기
             Collections.shuffle(bestSellerBookList);

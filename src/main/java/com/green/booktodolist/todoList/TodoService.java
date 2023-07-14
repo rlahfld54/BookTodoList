@@ -24,7 +24,9 @@ public class TodoService {
 
     }
     public int updel(UpdDel dto){
+
         SelDetailDto selTodo = mapper.selTodo(dto.getItodo());
+
         final int countup =10;
         final int countdown = -10;
 
@@ -55,7 +57,6 @@ public class TodoService {
         SelDetailDto selTodo = mapper.selTodo(dto.getItodo());
 
         if (dto.getStart().equals("") ||dto.getEnd().equals("") || dto.getMemo().equals("") || dto.getBookmark().equals("")){
-
             if (dto.getStart().equals("")){
                 dto.setStart(selTodo.getStart());
             }if (dto.getMemo().equals("")) {
@@ -65,7 +66,6 @@ public class TodoService {
             }if(dto.getBookmark().equals("")){
                 dto.setBookmark(selTodo.getBookmark());
             }
-
         }
 
         return  mapper.updTodo(dto);
